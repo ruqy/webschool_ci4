@@ -23,7 +23,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -35,8 +35,17 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->get('/school', 'SchoolController::index');
 
+$routes->get('/admin', 'Admin::index');
+
+$routes->get('/school', 'SchoolController::index');
+$routes->delete('/school/(:num)', 'SchoolController::delete/$1');
+$routes->get('/school/show/(:num)', 'SchoolController::show/$1');
+
+$routes->get('/school/add', 'SchoolController::create');
+$routes->post('/school/add', 'SchoolController::store');
+$routes->get('/school/edit/(:num)', 'SchoolController::edit/$1');
+$routes->post('/school/update', 'SchoolController::update');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

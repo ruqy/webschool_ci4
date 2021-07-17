@@ -6,7 +6,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Detail Sekolah</h3>
+            <h3 class="card-title">Dashboard</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -18,19 +18,11 @@
             </div>
         </div>
         <div class="card-body">
-            <img src="<?= $school['logo']; ?>" class="img-fluid" alt="logo sekolah">
-            <h1><?= $school['name']; ?></h1>
-            <p><?= $school['address']; ?></p>
-            <hr>
-            <h3><?= $school['phone_number']; ?></h3>
-            <h3><?= $school['fax']; ?></h3>
-            <hr>
-            <h3><?= $school['website']; ?></h3>
-            <p><?= $school['email']; ?></p>
+            Dashboard masih kosong
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <p><?= $school['created_at']; ?></p>
+
         </div>
         <!-- /.card-footer-->
     </div>

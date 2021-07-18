@@ -11,7 +11,8 @@ class Admin extends BaseController
 		$data = [
 			'title' => 'Admin Sekolah',
 			'header' => 'Dashboard',
+			'section' => 'Guru',
 		];
-		return view('admin/index', $data);
+		return view('admin/dashboard', $data);
 	}
 }

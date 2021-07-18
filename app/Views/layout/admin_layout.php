@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WebSchool | <?= $title; ?></title>
+    <title>WebSchool | Admin Sekolah</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -72,7 +72,8 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="<?= base_url('assets/img/profil/user-1.jpg'); ?> " class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Ruqy Faishal</a>
@@ -86,7 +87,7 @@
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="<?= base_url('/admin'); ?>"
-                                class="nav-link <?= (current_url(true) == base_url('/admin')) ? 'active' : ''; ?>">
+                                class="nav-link <?= (url_is('admin*')) ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -95,7 +96,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url('/school'); ?>" class="nav-link
-                                <?= (current_url(true) == base_url('/school')) ? 'active' : ''; ?>">
+                                <?= (url_is('school*')) ? 'active' : ''; ?>">
                                 <i class="nav-icon fas fa-school"></i>
                                 <p>
                                     Sekolah
@@ -129,9 +130,26 @@
             </section>
 
             <!-- Main content -->
-            <?= $this->renderSection('content'); ?>
-            <!-- /.content -->
+            <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><?= $section; ?></h3>
+                    </div>
+                    <!-- card body -->
+                    <div class="card-body">
+                        <?= $this->renderSection('content'); ?>
+                    </div>
+                    <!-- /.content -->
+                    <div class="card-footer">
+                        Aplikasi <strong>WebSchool</strong> P3SB v.1
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
         </div>
+        </section>
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">

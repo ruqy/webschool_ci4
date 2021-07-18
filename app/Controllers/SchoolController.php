@@ -13,44 +13,40 @@ class SchoolController extends BaseController
 	{
 		helper('filesystem');
 		$this->schools = new SchoolModel();
-		$this->title = 'Admin Sekolah';
 		$this->header = 'Sekolah';
 	}
 	public function index()
 	{
-		$data['title'] = $this->title;
 		$data['header'] = $this->header;
+		$data['section'] = 'Daftar Sekolah';
 		$data['school'] = $this->schools->findAll();
 		return view('school/index', $data);
 	}
 
 	public function show($id)
 	{
-		$data['title'] = $this->title;
 		$data['header'] = $this->header;
+		$data['section'] = 'Rincian Sekolah';
 		$data['school'] = $this->schools->find($id);
 		return view('school/detail', $data);
 	}
 
 	public function create()
 	{
-		$data['title'] = $this->title;
 		$data['header'] = $this->header;
+		$data['section'] = 'Tambah Sekolah';
 		return view('school/create', $data);
 	}
 
 	public function store()
 	{
-		$data['title'] = $this->title;
-		$data['header'] = $this->header;
-
 		$file = $this->request->getFile('logo');
 
 		if ($file->isValid()) {
-			$path = 'assets/img/logo/' . $file->getName();
-			$fileName = $file->getName();
+			$fileName = $file->getRandomName();
+			$pathLogo = '/assets/img/logo/' . $fileName;
 		} else {
-			$path = '';
+			$pathLogo = '/assets/img/logo/default.jpg';
 		}
 
 		$schoolData = [
@@ -60,15 +56,18 @@ class SchoolController extends BaseController
 			'phone_number' => $this->request->getPost('phone_number'),
 			'website' => $this->request->getPost('website'),
 			'fax' => $this->request->getPost('fax'),
-			'logo' => $path,
+			'logo' => $pathLogo,
 		];
+
 		if ($this->schools->save($schoolData) === false) {
 			$error = $this->schools->errors();
 			return redirect()->back()->withInput()->with('errors', $error);
 		}
-		if ($path != '') {
+
+		if ($file->isValid()) {
 			$file->move('assets/img/logo/', $fileName);
 		}
+
 		session()->setFlashdata('pesan', 'ditambah');
 		session()->setFlashdata('alert', 'alert-success');
 		return redirect()->to(base_url('/school'));
@@ -76,46 +75,60 @@ class SchoolController extends BaseController
 
 	public function edit($id)
 	{
-		$data['title'] = $this->title;
 		$data['header'] = $this->header;
+		$data['section'] = 'Edit Sekolah';
 		$data['school'] = $this->schools->find($id);
 		return view('school/edit', $data);
 	}
 
 	public function update()
 	{
-		$data['title'] = $this->title;
-		$data['header'] = $this->header;
-
 		$lastData = $this->schools->find($this->request->getPost('id'));
-		$lastLogo = $lastData['logo'];
+
+		//handler file logo untuk menghapus logo lama jika user update logo baru
 		$file = $this->request->getFile('logo');
 		if ($file->isValid()) {
-			$path = 'assets/img/logo/' . $file->getName();
-			$fileName = $file->getName();
+			$fileName = $file->getRandomName();
+			$pathLogo = '/assets/img/logo/' . $fileName;
+
+			//cek apakah logo berubah
+			if ($lastData['logo'] != $pathLogo) {
+				$pathDelete = '.' . $lastData['logo'];
+
+				//cek apakah logonya bukan default
+				if ($lastData['logo'] != '/assets/img/logo/default.jpg') {
+					//hapus logo lama
+					unlink($pathDelete);
+				}
+			}
 		} else {
-			$path = '';
+			//jika logo tidak berubah gunakan data yang lama
+			$pathLogo = $lastData['logo'];
 		}
 
 		$schoolData = [
 			'id' => $this->request->getPost('id'),
-			'name' => $this->request->getPost('name'),
 			'address' => $this->request->getPost('address'),
 			'email' => $this->request->getPost('email'),
 			'phone_number' => $this->request->getPost('phone_number'),
 			'website' => $this->request->getPost('website'),
 			'fax' => $this->request->getPost('fax'),
-			'logo' => $path,
+			'logo' => $pathLogo,
 		];
+
+		if ($lastData['name'] != $this->request->getPost('name')) {
+			$schoolData['name'] = $this->request->getPost('name');
+		}
+
 		if ($this->schools->save($schoolData) === false) {
 			$error = $this->schools->errors();
 			return redirect()->back()->withInput()->with('errors', $error);
 		}
 
-		if ($lastLogo != $path || $path != '') {
-			delete_files($lastLogo);
+		if ($file->isValid()) {
+			$file->move('assets/img/logo/', $fileName);
 		}
-		$file->move('assets/img/logo/', $fileName);
+
 		session()->setFlashdata('pesan', 'diubah');
 		session()->setFlashdata('alert', 'alert-success');
 		return redirect()->to(base_url('/school'));

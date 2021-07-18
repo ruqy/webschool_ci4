@@ -25,17 +25,18 @@ class SchoolModel extends Model
 
 	// Validation
 	protected $validationRules      = [
-		'name' => 'required',
+		'name' => 'required|is_unique[schools.name]',
 		'logo' => 'mime_in[logo,image/jpg,image/jpeg,image/png]|max_size[logo,512]',
 		'address' => 'required',
 		'email' => 'required|valid_email',
 	];
 	protected $validationMessages   = [
 		'name' => [
-			'required' => 'Nama sekolah harus diisi',
+			'required' => 'Nama sekolah harus diisi.',
+			'is_unique' => 'Nama sekolah sudah terdaftar.'
 		],
 		'logo' => [
-			'mime_in' => 'Ekstensi tidak didukung. File yang didukung adalah .jpg, .jpeg, .png.',
+			'mime_in' => 'Ekstensi tidak didukung. File yang didukung adalah .jpg, .jpeg, dan .png.',
 			'max_size' => 'File tidak boleh lebih dari 512 kb.'
 		],
 		'address' => [

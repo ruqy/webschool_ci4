@@ -1,40 +1,70 @@
 <?= $this->extend('layout/admin_layout') ?>
 
 <?= $this->section('content') ?>
-<section class="content">
 
-    <!-- Default box -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Detail Sekolah</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-                    <i class="fas fa-minus"></i></button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                    title="Remove">
-                    <i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div class="card-body">
-            <img src="<?= $school['logo']; ?>" class="img-fluid" alt="logo sekolah">
-            <h1><?= $school['name']; ?></h1>
-            <p><?= $school['address']; ?></p>
-            <hr>
-            <h3><?= $school['phone_number']; ?></h3>
-            <h3><?= $school['fax']; ?></h3>
-            <hr>
-            <h3><?= $school['website']; ?></h3>
-            <p><?= $school['email']; ?></p>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <p><?= $school['created_at']; ?></p>
-        </div>
-        <!-- /.card-footer-->
+<!-- Default box -->
+<div class="card card-widget widget-user-2">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <table class="table-borderless table-dark">
+        <tr>
+            <td rowspan=2 width="60px">
+                <img class="img-lg img-circle mx-2 my-2" src="<?= $school['logo']; ?>" alt="Logo Sekolah">
+            </td>
+            <td class="align-bottom">
+                <span class="display-4"><?= $school['name']; ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="align-top" height="40px"><i class="fas fa-school mr-3"></i><?= $school['address']; ?></td>
+        </tr>
+    </table>
+    <div class="card-footer p-0">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <div class="nav-link">
+                    <h4>Kontak</h4>
+                </div>
+                <div class="nav-link">
+                    <i class="fas fa-phone mr-3"></i><?= $school['phone_number']; ?>
+                </div>
+                <div class="nav-link">
+                    <i class="fas fa-fax mr-3"></i><?= $school['fax']; ?>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link">
+                    <h4>Website</h4>
+                </div>
+                <div class="nav-link">
+                    <i class="fab fa-chrome mr-3"></i><?= $school['website']; ?>
+                </div>
+                <div class="nav-link">
+                    <i class="fas fa-envelope mr-3"></i><?= $school['email']; ?>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link">
+                    <h4>Terdaftar Sejak</h4>
+                </div>
+                <div class="nav-link">
+                    <i class="fas fa-calendar mr-3"></i><?= $school['created_at']; ?>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link">
+                    <a href="<?= base_url('/school/edit/' . $school['id']); ?>" class="btn btn-warning">edit</a>
+                    <form action="<?= base_url('/school/' . $school['id']); ?>" method="post" class="d-inline">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('apakah anda yakin?')">hapus</button>
+                    </form>
+                    <span class="float-right"> <a href="<?= base_url('/school'); ?>"
+                            class="btn btn-secondary">kembali</a></span>
+                </div>
+            </li>
+        </ul>
     </div>
-    <!-- /.card -->
+</div>
 
-</section>
 <?= $this->endSection() ?>

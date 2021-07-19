@@ -46,7 +46,7 @@ $routes->post('/school/add', 'SchoolController::store');
 $routes->get('/school/edit/(:num)', 'SchoolController::edit/$1');
 $routes->post('/school/update', 'SchoolController::update');
 
-$routes->get('/curriculum', 'Curriculum::index');
+$routes->get('/academic', 'Academic::index');
 
 
 $routes->get('/auth', 'Auth::index');

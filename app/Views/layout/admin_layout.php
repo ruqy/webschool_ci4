@@ -103,6 +103,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('/academic'); ?>" class="nav-link
+                                <?= (url_is('academic*')) ? 'active' : ''; ?>">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Akademik
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

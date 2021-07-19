@@ -10,7 +10,7 @@ use App\Models\LevelsModel;
 use App\Models\SchoolYearsModel;
 use App\Models\SemestersModel;
 
-class SchoolController extends BaseController
+class Academic extends BaseController
 {
 
 
@@ -31,7 +31,7 @@ class SchoolController extends BaseController
 		$data['header'] = $this->header;
 		$data['section'] = 'Rincian';
 
-		return view('school/index', $data);
+		return view('academic/index', $data);
 	}
 
 	public function create()

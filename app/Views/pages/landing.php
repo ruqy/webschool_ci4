@@ -29,7 +29,8 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#program">Program</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#testimoni">Testimonial</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#daftar">Pendaftaran</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{route('login')}}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                            href="<?= base_url('/auth'); ?>">Login</a></li>
                 </ul>
             </div>
         </div>

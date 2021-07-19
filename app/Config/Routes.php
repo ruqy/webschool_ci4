@@ -49,6 +49,7 @@ $routes->post('/school/update', 'SchoolController::update');
 $routes->get('/curriculum', 'Curriculum::index');
 
 
+$routes->get('/auth', 'Auth::index');
 
 $routes->get('/test', 'Test::index');
 

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class SchoolYearsModel extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'schoolyears';
+	protected $table                = 'school_years';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -39,4 +39,16 @@ class SchoolYearsModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function get_data()
+	{
+		$this->join('school_years', 'school_years.departement_id = schools.name', 'LEFT');
+		$this->select('school_years*');
+		$result = $this->findAll();
+		echo $this->db->getLastQuery();
+
+		dd($result);
+		// $this->db->join('schools','school_years.departement_id = schools.id' );
+
+	}
 }

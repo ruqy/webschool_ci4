@@ -11,6 +11,7 @@ class Departements extends Migration
 		$this->forge->addField([
 			'id' => [
 				'type' => 'BIGINT',
+				'constraint' => 20,
 				'unsigned' => true,
 				'auto_increment' => true,
 			],
@@ -36,7 +37,7 @@ class Departements extends Migration
 				'type' => 'DATETIME',
 			],
 		]);
-		$this->forge->addKey('id');
+		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('departements');
 	}
 

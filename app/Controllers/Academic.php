@@ -7,6 +7,7 @@ use App\Models\DepartementsModel;
 use App\Models\GenerationsModel;
 use App\Models\GradesModel;
 use App\Models\LevelsModel;
+use App\Models\SchoolModel;
 use App\Models\SchoolYearsModel;
 use App\Models\SemestersModel;
 
@@ -18,62 +19,103 @@ class Academic extends BaseController
 	{
 		helper('filesystem');
 		$this->header = 'Data Akademik';
-		$this->departementModel = new DepartementsModel();
+		$this->departementsModel = new DepartementsModel();
 		$this->generationsModel = new GenerationsModel();
 		$this->gradesModel = new GradesModel();
 		$this->levelsModel = new LevelsModel();
 		$this->schoolYearsModel = new SchoolYearsModel();
 		$this->semestersModel = new SemestersModel();
+		$this->schoolsModel = new SchoolModel();
 	}
 
 	public function index()
 	{
 		$data['header'] = $this->header;
 		$data['section'] = 'Rincian';
-
+		$data['departement'] = $this->departementsModel->findAll();
+		$data['grades'] = $this->gradesModel->findAll();
+		$data['levels'] = $this->levelsModel->findAll();
+		$data['school_years'] = $this->schoolYearsModel->get_data();
+		$data['semester'] = $this->semestersModel->findAll();
+		$data['schools'] = $this->schoolsModel->findAll();
 		return view('academic/index', $data);
 	}
 
-	public function create()
+	public function create($form)
 	{
+		switch ($form) {
+			case 'school_years':
+				$data['form_title'] = "Tahun Pelajaran";
+				$data['departement'] = $this->schoolsModel->findAll();
+				break;
+			case 'semesters':
+				$data['form_title'] = "Semester";
+				break;
+			case 'departements':
+				$data['form_title'] = "Divisi";
+				break;
+			case 'levels':
+				$data['form_title'] = "Tingkat";
+				break;
+			case 'grades':
+				$data['form_title'] = "Kelas";
+				break;
+			case 'generations':
+				$data['form_title'] = "Angkatan";
+				break;
+		}
 		$data['header'] = $this->header;
 		$data['section'] = 'Tambah Data';
-		return view('school/create', $data);
+		$data['form'] = $form;
+		return view('academic/create', $data);
 	}
 
 	public function store()
 	{
-		$file = $this->request->getFile('logo');
+		$form = $this->request->getPost('form');
+		$data['name'] = $this->request->getPost('name');
+		$data['desc'] = $this->request->getPost('desc');
 
-		if ($file->isValid()) {
-			$fileName = $file->getRandomName();
-			$pathLogo = '/assets/img/logo/' . $fileName;
-		} else {
-			$pathLogo = '/assets/img/logo/default.jpg';
+		if ($form != 'Divisi') {
+			$data['departement_id'] = $this->request->getPost('departement_id');
 		}
-
-		$schoolData = [
-			'name' => $this->request->getPost('name'),
-			'address' => $this->request->getPost('address'),
-			'email' => $this->request->getPost('email'),
-			'phone_number' => $this->request->getPost('phone_number'),
-			'website' => $this->request->getPost('website'),
-			'fax' => $this->request->getPost('fax'),
-			'logo' => $pathLogo,
-		];
-
-		if ($this->schools->save($schoolData) === false) {
-			$error = $this->schools->errors();
-			return redirect()->back()->withInput()->with('errors', $error);
+		switch ($form) {
+			case 'Tahun Pelajaran':
+				$data['start_date'] = $this->request->getPost('start_date');
+				$data['end_date'] = $this->request->getPost('end_date');
+				$this->schoolYearsModel->save($data);
+				break;
+			case 'Semester':
+				//simpan data
+				$this->semestersModel->save($data);
+				break;
+			case 'Divisi':
+				$data['status'] = $this->request->getPost('status');
+				$data['headmaster_id'] = $this->request->getPost('headmaster_id');
+				$this->departementsModel->save($data);
+				break;
+			case 'Tingkat':
+				//simpan data
+				$this->levels->save($data);
+				break;
+			case 'Kelas':
+				$data['level_id'] = $this->request->getPost('level');
+				$data['school_year'] = $this->request->getPost('school_year');
+				$data['teacher_id'] = $this->request->getPost('teacher_id');
+				$data['capacity'] = $this->request->getPost('capacity');
+				$data['current_capacity'] = $this->request->getPost('current_capacity');
+				$data['status'] = $this->request->getPost('status');
+				$this->gradesModel->save($data);
+				break;
+			case 'Angkatan':
+				$data['status'] = $this->request->getPost('status');
+				$this->gerationsModel->save($data);
+				break;
 		}
-
-		if ($file->isValid()) {
-			$file->move('assets/img/logo/', $fileName);
-		}
-
-		session()->setFlashdata('pesan', 'ditambah');
+		session()->setFlashdata('form', $form);
+		session()->setFlashdata('pesan', " ditambah");
 		session()->setFlashdata('alert', 'alert-success');
-		return redirect()->to(base_url('/school'));
+		return redirect()->to(base_url('/academic'));
 	}
 
 	public function edit($id)
@@ -89,25 +131,6 @@ class Academic extends BaseController
 		$lastData = $this->schools->find($this->request->getPost('id'));
 
 		//handler file logo untuk menghapus logo lama jika user update logo baru
-		$file = $this->request->getFile('logo');
-		if ($file->isValid()) {
-			$fileName = $file->getRandomName();
-			$pathLogo = '/assets/img/logo/' . $fileName;
-
-			//cek apakah logo berubah
-			if ($lastData['logo'] != $pathLogo) {
-				$pathDelete = '.' . $lastData['logo'];
-
-				//cek apakah logonya bukan default
-				if ($lastData['logo'] != '/assets/img/logo/default.jpg') {
-					//hapus logo lama
-					unlink($pathDelete);
-				}
-			}
-		} else {
-			//jika logo tidak berubah gunakan data yang lama
-			$pathLogo = $lastData['logo'];
-		}
 
 		$schoolData = [
 			'id' => $this->request->getPost('id'),
@@ -116,32 +139,43 @@ class Academic extends BaseController
 			'phone_number' => $this->request->getPost('phone_number'),
 			'website' => $this->request->getPost('website'),
 			'fax' => $this->request->getPost('fax'),
-			'logo' => $pathLogo,
 		];
 
 		if ($lastData['name'] != $this->request->getPost('name')) {
 			$schoolData['name'] = $this->request->getPost('name');
 		}
-
-		if ($this->schools->save($schoolData) === false) {
-			$error = $this->schools->errors();
-			return redirect()->back()->withInput()->with('errors', $error);
-		}
-
-		if ($file->isValid()) {
-			$file->move('assets/img/logo/', $fileName);
-		}
-
+		session()->setFlashdata('alert', 'alert-warning');
 		session()->setFlashdata('pesan', 'diubah');
-		session()->setFlashdata('alert', 'alert-success');
-		return redirect()->to(base_url('/school'));
+		return redirect()->to(base_url('/academic'));
 	}
 
 	public function delete($id)
 	{
-		$this->schools->delete($id);
-		session()->setFlashdata('pesan', 'dihapus');
+		$form = $this->request->getPost('form');
+
+		switch ($form) {
+			case 'Tahun Pelajaran':
+				$this->schoolYearsModel->delete($id);
+				break;
+			case 'Semester':
+				$this->semestersModel->delete($id);
+				break;
+			case 'Divisi':
+				$this->departementsModel->delete($id);
+				break;
+			case 'Tingkat':
+				$this->levelsModel->delete($id);
+				break;
+			case 'Kelas':
+				$this->gradesModel->delete($id);
+				break;
+			case 'Angkatan':
+				$this->generationsModel->delete($id);
+				break;
+		}
+		session()->setFlashdata('form', $form);
+		session()->setFlashdata('pesan', ' dihapus');
 		session()->setFlashdata('alert', 'alert-danger');
-		return redirect()->to(base_url('/school'));
+		return redirect()->to(base_url('/academic'));
 	}
 }

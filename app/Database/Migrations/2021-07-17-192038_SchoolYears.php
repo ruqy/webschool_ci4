@@ -20,7 +20,9 @@ class SchoolYears extends Migration
 				'constraint' => 255,
 			],
 			'departement_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => true,
 			],
 			'desc' => [
 				'type' => 'VARCHAR',
@@ -39,7 +41,8 @@ class SchoolYears extends Migration
 				'type' => 'DATETIME',
 			],
 		]);
-		$this->forge->addKey('id');
+		$this->forge->addKey('id', TRUE);
+		$this->forge->addForeignKey('departement_id', 'departements', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('school_years');
 	}
 

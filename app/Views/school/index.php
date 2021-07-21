@@ -28,7 +28,7 @@
         <?php foreach ($school as $d) : ?>
         <tr>
             <th scope="row"><?= $i++; ?></th>
-            <td><a href="<?= base_url('/school/show/' . $d['id']); ?>"><?= $d['name']; ?></a></td>
+            <td><a href="<?= base_url('/school/show/' . $d['id']); ?>"><?= $d['school_name']; ?></a></td>
             <td><?= $d['email']; ?></td>
             <td><?= $d['phone_number']; ?></td>
             <td>

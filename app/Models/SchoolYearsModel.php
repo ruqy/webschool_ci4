@@ -40,15 +40,12 @@ class SchoolYearsModel extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	public function get_data()
+	public function get_data($id = NULL)
 	{
-		$this->join('school_years', 'school_years.departement_id = schools.name', 'LEFT');
-		$this->select('school_years*');
-		$result = $this->findAll();
-		echo $this->db->getLastQuery();
-
-		dd($result);
-		// $this->db->join('schools','school_years.departement_id = schools.id' );
-
+		if ($id === NULL) {
+			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'right')->get()->getResultArray();
+		} else {
+			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'left')->where('school_years.id', $id)->get()->getRowArray();
+		}
 	}
 }

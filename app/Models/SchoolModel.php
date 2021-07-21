@@ -14,7 +14,7 @@ class SchoolModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['name', 'address', 'logo', 'phone_number', 'email', 'website', 'fax'];
+	protected $allowedFields        = ['school_name', 'address', 'logo', 'phone_number', 'email', 'website', 'fax'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -25,13 +25,13 @@ class SchoolModel extends Model
 
 	// Validation
 	protected $validationRules      = [
-		'name' => 'required|is_unique[schools.name]',
+		'school_name' => 'required|is_unique[schools.school_name]',
 		'logo' => 'mime_in[logo,image/jpg,image/jpeg,image/png]|max_size[logo,512]',
 		'address' => 'required',
 		'email' => 'required|valid_email',
 	];
 	protected $validationMessages   = [
-		'name' => [
+		'school_name' => [
 			'required' => 'Nama sekolah harus diisi.',
 			'is_unique' => 'Nama sekolah sudah terdaftar.'
 		],

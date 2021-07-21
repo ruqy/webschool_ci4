@@ -43,7 +43,7 @@
                         <tr>
                             <td><?= $i++; ?></td>
                             <td><?= $s['name']; ?></td>
-                            <td><?= $s['departement_id']; ?></td>
+                            <td><?= $s['school_name']; ?></td>
                             <td><?= $s['start_date']; ?></td>
                             <td><?= $s['end_date']; ?></td>
                             <td class="text-center">

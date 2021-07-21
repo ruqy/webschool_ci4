@@ -50,7 +50,7 @@ class SchoolController extends BaseController
 		}
 
 		$schoolData = [
-			'name' => $this->request->getPost('name'),
+			'school_name' => $this->request->getPost('name'),
 			'address' => $this->request->getPost('address'),
 			'email' => $this->request->getPost('email'),
 			'phone_number' => $this->request->getPost('phone_number'),
@@ -116,8 +116,8 @@ class SchoolController extends BaseController
 			'logo' => $pathLogo,
 		];
 
-		if ($lastData['name'] != $this->request->getPost('name')) {
-			$schoolData['name'] = $this->request->getPost('name');
+		if ($lastData['school_name'] != $this->request->getPost('name')) {
+			$schoolData['school_name'] = $this->request->getPost('name');
 		}
 
 		if ($this->schools->save($schoolData) === false) {

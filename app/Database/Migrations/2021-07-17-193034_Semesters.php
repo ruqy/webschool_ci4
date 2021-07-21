@@ -15,7 +15,9 @@ class Semesters extends Migration
 				'auto_increment' => true,
 			],
 			'departement_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => true,
 			],
 			'desc' => [
 				'type' => 'VARCHAR',
@@ -33,6 +35,7 @@ class Semesters extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
+		$this->forge->addForeignKey('departement_id', 'schools', 'id');
 		$this->forge->createTable('semesters');
 	}
 

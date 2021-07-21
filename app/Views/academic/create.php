@@ -24,7 +24,7 @@
             <select class="form-control select2" style="width: 100%;" name="departement_id">
                 <option value="0">Pilih divisi</option>
                 <?php foreach ($departement as $d) { ?>
-                <option value="<?= $d['id']; ?>"><?= $d['name']; ?></option>
+                <option value="<?= $d['id']; ?>"><?= $d['school_name']; ?></option>
                 <?php } ?>
             </select>
         </div>

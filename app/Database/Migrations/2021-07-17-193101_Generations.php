@@ -27,7 +27,10 @@ class Generations extends Migration
 				'constraint' => 1,
 			],
 			'departement_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => true,
+
 			],
 			'created_at' => [
 				'type' => 'DATETIME',
@@ -37,6 +40,7 @@ class Generations extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
+		$this->forge->addForeignKey('departement_id', 'schools', 'id');
 		$this->forge->createTable('generations');
 	}
 

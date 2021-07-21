@@ -12,9 +12,9 @@ $errors = session()->getFlashdata('errors');
         <div class="col-sm-10">
             <input type="text" class="form-control" id="name" placeholder="Nama Sekolah" name="name"
                 value="<?= old('name'); ?>">
-            <?php if (!empty($errors['name'])) { ?>
+            <?php if (!empty($errors['school_name'])) { ?>
             <div class="text-sm text-danger">
-                <?= $errors['name']; ?>
+                <?= $errors['school_name']; ?>
             </div>
             <?php } ?>
         </div>

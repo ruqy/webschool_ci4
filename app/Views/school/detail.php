@@ -11,7 +11,7 @@
                 <img class="img-lg img-circle mx-2 my-2" src="<?= $school['logo']; ?>" alt="Logo Sekolah">
             </td>
             <td class="align-bottom">
-                <span class="display-4"><?= $school['name']; ?></span>
+                <span class="display-4"><?= $school['school_name']; ?></span>
             </td>
         </tr>
         <tr>

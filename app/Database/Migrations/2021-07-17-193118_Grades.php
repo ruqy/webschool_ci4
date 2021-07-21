@@ -15,14 +15,17 @@ class Grades extends Migration
 				'auto_increment' => true,
 			],
 			'departement_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => true,
 			],
 			'desc' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
 			'level_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'unsigned' => true,
 			],
 			'school_year' => [
 				'type' => 'INT',

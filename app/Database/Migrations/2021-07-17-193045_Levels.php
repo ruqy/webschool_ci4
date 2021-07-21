@@ -14,12 +14,15 @@ class Levels extends Migration
 				'unsigned' => true,
 				'auto_increment' => true,
 			],
-			'name' => [
+			'level_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
 			'departement_id' => [
-				'type' => 'INT',
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => true,
+
 			],
 			'desc' => [
 				'type' => 'VARCHAR',
@@ -33,6 +36,7 @@ class Levels extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
+		$this->forge->addForeignKey('departement_id', 'schools', 'id');
 		$this->forge->createTable('levels');
 	}
 

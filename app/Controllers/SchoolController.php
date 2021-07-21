@@ -8,13 +8,13 @@ use App\Models\SchoolModel;
 class SchoolController extends BaseController
 {
 
-
 	public function __construct()
 	{
 		helper('filesystem');
 		$this->schools = new SchoolModel();
 		$this->header = 'Sekolah';
 	}
+
 	public function index()
 	{
 		$data['header'] = $this->header;

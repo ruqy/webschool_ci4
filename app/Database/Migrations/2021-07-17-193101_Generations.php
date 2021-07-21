@@ -40,7 +40,7 @@ class Generations extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'schools', 'id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'id');
 		$this->forge->createTable('generations');
 	}
 

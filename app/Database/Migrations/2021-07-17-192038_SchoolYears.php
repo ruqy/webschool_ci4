@@ -42,7 +42,7 @@ class SchoolYears extends Migration
 			],
 		]);
 		$this->forge->addKey('id', TRUE);
-		$this->forge->addForeignKey('departement_id', 'schools', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('departement_id', 'departements', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('school_years');
 	}
 

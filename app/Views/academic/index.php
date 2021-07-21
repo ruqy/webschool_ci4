@@ -24,6 +24,7 @@
                         <i class="fas fa-times"></i></button>
                 </div>
             </div>
+
             <div class="card-body">
                 <?php if (!empty($school_years)) { ?>
                 <table class="table table-bordered">
@@ -42,7 +43,10 @@
                         <?php foreach ($school_years as $s) : ?>
                         <tr>
                             <td><?= $i++; ?></td>
-                            <td><?= $s['name']; ?></td>
+                            <td>
+                                <a data-toggle="tooltip" data-placement="top" title="detil sekolah"
+                                    href="<?= base_url('/academic/show/Tahun Pelajaran/' . $s['id']); ?>"><?= $s['name']; ?></a>
+                            </td>
                             <td><?= $s['school_name']; ?></td>
                             <td><?= $s['start_date']; ?></td>
                             <td><?= $s['end_date']; ?></td>

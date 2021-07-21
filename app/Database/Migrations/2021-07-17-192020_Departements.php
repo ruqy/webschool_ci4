@@ -10,20 +10,20 @@ class Departements extends Migration
 	{
 		$this->forge->addField([
 			'id' => [
-				'type' => 'BIGINT',
-				'constraint' => 20,
+				'type' => 'INT',
+				'constraint' => 11,
 				'unsigned' => true,
 				'auto_increment' => true,
 			],
-			'name' => [
+			'departement_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'desc' => [
+			'departement_desc' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'status' => [
+			'departement_status' => [
 				'type' => 'TINYINT',
 				'constraint' => 1,
 			],

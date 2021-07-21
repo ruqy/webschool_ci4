@@ -1,7 +1,7 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 
-<form action="<?= base_url('academic/store'); ?>" method="post">
+<form action="<?= base_url('academic/add'); ?>" method="post">
     <?= csrf_field(); ?>
     <h4 class="mb-3"><?= $form_title; ?></h4>
     <input type="hidden" name="form" value="<?= $form_title; ?>">

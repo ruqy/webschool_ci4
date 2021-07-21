@@ -9,11 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?= base_url('plugins/fontawesome-free/css/all.min.css'); ?>">
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/adminlte.min.css'); ?>">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -29,7 +30,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../../index3.html" class="nav-link">Home</a>
+                    <a href="index3.html" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -61,8 +62,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
-                <img src="../../assets/img/AdminLTELogo.png" alt="AdminLTE Logo"
+            <a href="index3.html" class="brand-link">
+                <img src="<?= base_url('assets/img/AdminLTELogo.png'); ?>" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">WebSchool</span>
             </a>
@@ -178,15 +179,15 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="<?= base_url('plugins/jquery/jquery.min.js'); ?>"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <!-- bs-custom-file-input -->
-    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="<?= base_url('plugins/bs-custom-file-input/bs-custom-file-input.min.js'); ?>"></script>
     <!-- AdminLTE App -->
-    <script src="../../assets/js/adminlte.min.js"></script>
+    <script src="<?= base_url('assets/js/adminlte.min.js'); ?>"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../assets/js/demo.js"></script>
+    <script src="<?= base_url('assets/js/demo.js'); ?>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         bsCustomFileInput.init();

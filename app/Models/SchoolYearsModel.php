@@ -43,7 +43,7 @@ class SchoolYearsModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'right')->get()->getResultArray();
+			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'left')->get()->getResultArray();
 		} else {
 			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'left')->where('school_years.id', $id)->get()->getRowArray();
 		}

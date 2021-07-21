@@ -70,6 +70,34 @@ class Academic extends BaseController
 		return view('academic/create', $data);
 	}
 
+	public function show($form, $id)
+	{
+		$data['header'] = $this->header;
+		$data['section'] = 'Detail Data';
+		$data['form'] = $form;
+		switch ($form) {
+			case 'Tahun Pelajaran':
+				$data['data'] = $this->schoolYearsModel->find($id);
+				break;
+			case 'Semester':
+				$data['data'] = $this->semestersModel->find($id);
+				break;
+			case 'Divisi':
+				$data['data'] = $this->departementsModel->find($id);
+				break;
+			case 'Tingkat':
+				$data['data'] = $this->levels->find($id);
+				break;
+			case 'Kelas':
+				$data['data'] = $this->gradesModel->find($id);
+				break;
+			case 'Angkatan':
+				$data['data'] = $this->gerationsModel->find($id);
+				break;
+		}
+		return view('academic/detail', $data);
+	}
+
 	public function store()
 	{
 		$form = $this->request->getPost('form');

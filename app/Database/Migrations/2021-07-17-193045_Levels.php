@@ -24,7 +24,7 @@ class Levels extends Migration
 				'unsigned' => true,
 
 			],
-			'desc' => [
+			'level_desc' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
@@ -36,7 +36,7 @@ class Levels extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'schools', 'id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'id');
 		$this->forge->createTable('levels');
 	}
 

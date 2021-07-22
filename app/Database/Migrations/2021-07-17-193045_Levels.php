@@ -20,7 +20,6 @@ class Levels extends Migration
 			],
 			'departement_id' => [
 				'type' => 'BIGINT',
-				'constraint' => 20,
 				'unsigned' => true,
 
 			],

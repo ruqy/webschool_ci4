@@ -36,7 +36,8 @@
                     <h4>Website</h4>
                 </div>
                 <div class="nav-link">
-                    <i class="fab fa-chrome mr-3"></i><?= $school['website']; ?>
+                    <i class="fab fa-chrome mr-3"></i><a
+                        href="http://<?= $school['website']; ?>"><?= $school['website']; ?></a>
                 </div>
                 <div class="nav-link">
                     <i class="fas fa-envelope mr-3"></i><?= $school['email']; ?>

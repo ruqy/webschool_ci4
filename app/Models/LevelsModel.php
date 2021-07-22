@@ -14,7 +14,7 @@ class LevelsModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['name', 'departement', 'desc'];
+	protected $allowedFields        = ['name', 'departement_id', 'desc'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -39,4 +39,13 @@ class LevelsModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function get_data($id = NULL)
+	{
+		if ($id === NULL) {
+			return $this->table('levels')->join('departements', 'departements.id=levels.departement_id', 'left')->get()->getResultArray();
+		} else {
+			return $this->table('levels')->join('departements', 'departements.id=levels.departement_id', 'left')->where('levels.id', $id)->get()->getRowArray();
+		}
+	}
 }

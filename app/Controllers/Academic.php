@@ -25,49 +25,20 @@ class Academic extends BaseController
 		$this->levelsModel = new LevelsModel();
 		$this->schoolYearsModel = new SchoolYearsModel();
 		$this->semestersModel = new SemestersModel();
-		$this->schoolsModel = new SchoolModel();
+		$this->generationsModel = new GenerationsModel();
 	}
 
 	public function index()
 	{
 		$data['header'] = $this->header;
 		$data['section'] = 'Rincian';
-		$data['departement'] = $this->departementsModel->findAll();
-		$data['grades'] = $this->gradesModel->findAll();
-		$data['levels'] = $this->levelsModel->findAll();
+		$data['departements'] = $this->departementsModel->findAll();
+		$data['grades'] = $this->gradesModel->get_data();
+		$data['levels'] = $this->levelsModel->get_data();
 		$data['school_years'] = $this->schoolYearsModel->get_data();
-		$data['semester'] = $this->semestersModel->findAll();
-		$data['schools'] = $this->schoolsModel->findAll();
+		$data['semesters'] = $this->semestersModel->get_data();
+		$data['generations'] = $this->generationsModel->get_data();
 		return view('academic/index', $data);
-	}
-
-	public function create($form)
-	{
-		switch ($form) {
-			case 'school_years':
-				$data['form_title'] = "Tahun Pelajaran";
-				$data['departement'] = $this->schoolsModel->findAll();
-				break;
-			case 'semesters':
-				$data['form_title'] = "Semester";
-				break;
-			case 'departements':
-				$data['form_title'] = "Divisi";
-				break;
-			case 'levels':
-				$data['form_title'] = "Tingkat";
-				break;
-			case 'grades':
-				$data['form_title'] = "Kelas";
-				break;
-			case 'generations':
-				$data['form_title'] = "Angkatan";
-				break;
-		}
-		$data['header'] = $this->header;
-		$data['section'] = 'Tambah Data';
-		$data['form'] = $form;
-		return view('academic/create', $data);
 	}
 
 	public function show($form, $id)
@@ -92,43 +63,59 @@ class Academic extends BaseController
 				$data['data'] = $this->gradesModel->find($id);
 				break;
 			case 'Angkatan':
-				$data['data'] = $this->gerationsModel->find($id);
+				$data['data'] = $this->generationsModel->find($id);
 				break;
 		}
 		return view('academic/detail', $data);
 	}
 
+	public function create($form)
+	{
+		$data['departement'] = $this->departementsModel->findAll();
+		$data['levels'] = $this->levelsModel->findAll();
+		$data['school_years'] = $this->schoolYearsModel->findAll();
+		$data['header'] = $this->header;
+		$data['section'] = 'Tambah Data';
+		return view('academic/create/' . $form, $data);
+	}
+
 	public function store()
 	{
 		$form = $this->request->getPost('form');
-		$data['name'] = $this->request->getPost('name');
-		$data['desc'] = $this->request->getPost('desc');
-
 		if ($form != 'Divisi') {
 			$data['departement_id'] = $this->request->getPost('departement_id');
 		}
 		switch ($form) {
 			case 'Tahun Pelajaran':
+				$data['name'] = $this->request->getPost('name');
+				$data['school_year_desc'] = $this->request->getPost('desc');
 				$data['start_date'] = $this->request->getPost('start_date');
 				$data['end_date'] = $this->request->getPost('end_date');
 				$this->schoolYearsModel->save($data);
 				break;
 			case 'Semester':
-				//simpan data
+				$data['name'] = $this->request->getPost('name');
+				$data['desc'] = $this->request->getPost('desc');
 				$this->semestersModel->save($data);
 				break;
 			case 'Divisi':
-				$data['status'] = $this->request->getPost('status');
+				$data['departement_name'] = $this->request->getPost('name');
+				$data['departement_desc'] = $this->request->getPost('desc');
+				$data['departement_status'] = $this->request->getPost('status');
 				$data['headmaster_id'] = $this->request->getPost('headmaster_id');
 				$this->departementsModel->save($data);
 				break;
 			case 'Tingkat':
-				//simpan data
-				$this->levels->save($data);
+				$data['level_name'] = $this->request->getPost('name');
+				$data['level_desc'] = $this->request->getPost('desc');
+				$data['departement_id'] = $this->request->getPost('departement_id');
+				$this->levelsModel->save($data);
 				break;
 			case 'Kelas':
+				$data['name'] = $this->request->getPost('name');
+				$data['desc'] = $this->request->getPost('desc');
 				$data['level_id'] = $this->request->getPost('level');
-				$data['school_year'] = $this->request->getPost('school_year');
+				$data['school_year_id'] = $this->request->getPost('school_year');
 				$data['teacher_id'] = $this->request->getPost('teacher_id');
 				$data['capacity'] = $this->request->getPost('capacity');
 				$data['current_capacity'] = $this->request->getPost('current_capacity');
@@ -136,8 +123,10 @@ class Academic extends BaseController
 				$this->gradesModel->save($data);
 				break;
 			case 'Angkatan':
+				$data['name'] = $this->request->getPost('name');
+				$data['desc'] = $this->request->getPost('desc');
 				$data['status'] = $this->request->getPost('status');
-				$this->gerationsModel->save($data);
+				$this->generationsModel->save($data);
 				break;
 		}
 		session()->setFlashdata('form', $form);
@@ -146,12 +135,40 @@ class Academic extends BaseController
 		return redirect()->to(base_url('/academic'));
 	}
 
-	public function edit($id)
+	public function edit($form, $id)
 	{
+		$data['departement'] = $this->departementsModel->findAll();
+		// dd($data);
 		$data['header'] = $this->header;
 		$data['section'] = 'Edit Data';
-		$data['school'] = $this->schools->find($id);
-		return view('school/edit', $data);
+		$data['form'] = $form;
+		switch ($form) {
+			case 'school_years':
+				$data['form_title'] = 'Tahun Ajaran';
+				$data['school_year'] = $this->schoolYearsModel->find($id);
+				break;
+			case 'departements':
+				$data['form_title'] = 'Divisi';
+				break;
+			case 'grades':
+				$data['form_title'] = 'Kelas';
+				$data['grade'] = $this->gradesModel->find($id);
+				break;
+			case 'levels':
+				$data['form_title'] = 'Tingkat';
+				$data['level'] = $this->levelsModel->find($id);
+				break;
+			case 'generations':
+				$data['form_title'] = 'Angkatan';
+				$data['generation'] = $this->generationsModel->find($id);
+				break;
+			case 'semesters':
+				$data['form_title'] = 'Semester';
+				$data['semester'] = $this->semestersModel->find($id);
+				break;
+		}
+		// dd($data);
+		return view('academic/edit', $data);
 	}
 
 	public function update()
@@ -205,5 +222,10 @@ class Academic extends BaseController
 		session()->setFlashdata('pesan', ' dihapus');
 		session()->setFlashdata('alert', 'alert-danger');
 		return redirect()->to(base_url('/academic'));
+	}
+
+	//sub fungsi untuk membuat fungsi create per tabel
+	private function _create_school_years()
+	{
 	}
 }

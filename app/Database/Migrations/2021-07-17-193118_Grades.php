@@ -16,7 +16,6 @@ class Grades extends Migration
 			],
 			'departement_id' => [
 				'type' => 'BIGINT',
-				'constraint' => 20,
 				'unsigned' => true,
 			],
 			'desc' => [
@@ -27,8 +26,9 @@ class Grades extends Migration
 				'type' => 'BIGINT',
 				'unsigned' => true,
 			],
-			'school_year' => [
-				'type' => 'INT',
+			'school_year_id' => [
+				'type' 		=> 'INT',
+				'unsigned'	=> true,
 			],
 			'name' => [
 				'type' => 'VARCHAR',
@@ -55,8 +55,9 @@ class Grades extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'schools', 'id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'id');
 		$this->forge->addForeignKey('level_id', 'levels', 'id');
+		$this->forge->addForeignKey('school_year_id', 'school_years', 'school_year_id');
 		// $this->forge->addForeignKey('headmaster_id', 'teacher', 'id');
 		$this->forge->createTable('grades');
 	}

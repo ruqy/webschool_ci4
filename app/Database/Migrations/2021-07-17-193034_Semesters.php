@@ -15,8 +15,7 @@ class Semesters extends Migration
 				'auto_increment' => true,
 			],
 			'departement_id' => [
-				'type' => 'INT',
-				'constraint' => 11,
+				'type' => 'BIGINT',
 				'unsigned' => true,
 			],
 			'desc' => [

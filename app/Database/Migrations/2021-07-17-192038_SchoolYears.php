@@ -9,22 +9,21 @@ class SchoolYears extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id' => [
+			'school_year_id' => [
 				'type' => 'INT',
 				'constraint' => 11,
 				'unsigned' => true,
 				'auto_increment' => true,
 			],
-			'name' => [
+			'school_year_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
 			'departement_id' => [
 				'type' => 'BIGINT',
-				'constraint' => 20,
 				'unsigned' => true,
 			],
-			'desc' => [
+			'school_year_desc' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
@@ -41,7 +40,7 @@ class SchoolYears extends Migration
 				'type' => 'DATETIME',
 			],
 		]);
-		$this->forge->addKey('id', TRUE);
+		$this->forge->addKey('school_year_id', TRUE);
 		$this->forge->addForeignKey('departement_id', 'departements', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('school_years');
 	}

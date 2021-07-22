@@ -39,4 +39,13 @@ class SemestersModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function get_data($id = NULL)
+	{
+		if ($id === NULL) {
+			return $this->table('semesters')->join('departements', 'departements.id=semesters.departement_id', 'left')->get()->getResultArray();
+		} else {
+			return $this->table('semesters')->join('departements', 'departements.id=semesters.departement_id', 'left')->where('semesters.id', $id)->get()->getRowArray();
+		}
+	}
 }

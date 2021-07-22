@@ -8,7 +8,7 @@ class SchoolYearsModel extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'school_years';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'school_year_id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
@@ -43,9 +43,9 @@ class SchoolYearsModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'left')->get()->getResultArray();
+			return $this->table('school_years')->join('departements', 'departements.id=school_years.departement_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('school_years')->join('schools', 'schools.id=school_years.departement_id', 'left')->where('school_years.id', $id)->get()->getRowArray();
+			return $this->table('school_years')->join('departements', 'departements.id=school_years.departement_id', 'left')->where('school_years.school_year_id', $id)->get()->getRowArray();
 		}
 	}
 }

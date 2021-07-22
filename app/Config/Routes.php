@@ -50,6 +50,8 @@ $routes->get('/academic', 'Academic::index');
 $routes->get('/academic/show/(:any)', 'Academic::show/$1');
 $routes->get('/academic/add/(:any)', 'Academic::create/$1');
 $routes->post('/academic/add', 'Academic::store');
+$routes->get('/academic/edit/(:any)', 'Academic::edit/$1');
+$routes->post('/academic/update', 'Academic::update');
 $routes->delete('/academic/(:any)', 'Academic::delete/$1');
 
 

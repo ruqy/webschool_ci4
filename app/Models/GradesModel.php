@@ -14,7 +14,7 @@ class GradesModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['departement_id', 'desc', 'level_id', 'school_year', 'name', 'teacher_id', 'capacity', 'status', 'current_capacity'];
+	protected $allowedFields        = ['departement_id', 'desc', 'level_id', 'school_year_id', 'name', 'teacher_id', 'capacity', 'status', 'current_capacity'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -39,4 +39,13 @@ class GradesModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function get_data($id = NULL)
+	{
+		if ($id === NULL) {
+			return $this->table('grades')->join('departements', 'departements.id=grades.departement_id', 'left')->join('levels', 'levels.id=grades.level_id', 'left')->get()->getResultArray();
+		} else {
+			return $this->table('grades')->join('departements', 'departements.id=grades.departement_id', 'left')->where('grades.id', $id)->get()->getRowArray();
+		}
+	}
 }

@@ -8,13 +8,13 @@ class LevelsModel extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'levels';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'level_id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['name', 'departement_id', 'desc'];
+	protected $allowedFields        = ['level_name', 'departement_id', 'level_desc'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -43,9 +43,9 @@ class LevelsModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('levels')->join('departements', 'departements.id=levels.departement_id', 'left')->get()->getResultArray();
+			return $this->table('levels')->join('departements', 'departements.departement_id=levels.departement_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('levels')->join('departements', 'departements.id=levels.departement_id', 'left')->where('levels.id', $id)->get()->getRowArray();
+			return $this->table('levels')->join('departements', 'departements.departement_id=levels.departement_id', 'left')->where('levels.level_id', $id)->get()->getRowArray();
 		}
 	}
 }

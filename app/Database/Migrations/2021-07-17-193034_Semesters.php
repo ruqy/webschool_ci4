@@ -34,7 +34,7 @@ class Semesters extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'departements', 'id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'departement_id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('semesters');
 	}
 

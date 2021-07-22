@@ -43,9 +43,9 @@ class SemestersModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('semesters')->join('departements', 'departements.id=semesters.departement_id', 'left')->get()->getResultArray();
+			return $this->table('semesters')->join('departements', 'departements.departement_id=semesters.departement_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('semesters')->join('departements', 'departements.id=semesters.departement_id', 'left')->where('semesters.id', $id)->get()->getRowArray();
+			return $this->table('semesters')->join('departements', 'departements.departement_id=semesters.departement_id', 'left')->where('semesters.id', $id)->get()->getRowArray();
 		}
 	}
 }

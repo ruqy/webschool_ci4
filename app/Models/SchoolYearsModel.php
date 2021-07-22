@@ -14,7 +14,7 @@ class SchoolYearsModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['name', 'departement_id', 'desc', 'start_date', 'end_date'];
+	protected $allowedFields        = ['school_year_name', 'departement_id', 'school_year_desc', 'start_date', 'end_date'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -43,9 +43,9 @@ class SchoolYearsModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('school_years')->join('departements', 'departements.id=school_years.departement_id', 'left')->get()->getResultArray();
+			return $this->table('school_years')->join('departements', 'departements.departement_id=school_years.departement_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('school_years')->join('departements', 'departements.id=school_years.departement_id', 'left')->where('school_years.school_year_id', $id)->get()->getRowArray();
+			return $this->table('school_years')->join('departements', 'departements.departement_id=school_years.departement_id', 'left')->where('school_years.school_year_id', $id)->get()->getRowArray();
 		}
 	}
 }

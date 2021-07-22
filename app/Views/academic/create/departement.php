@@ -4,22 +4,11 @@
 <form action="<?= base_url('academic/add'); ?>" method="post">
     <?= csrf_field(); ?>
     <h4 class="mb-3">Divisi</h4>
-    <input type="hidden" name="form" value="divisi">
+    <input type="hidden" name="form" value="Divisi">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="divisi" name="name">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="departement" class="col-sm-2 col-form-label">Divisi</label>
-        <div class="col-sm-10">
-            <select class="form-control select2" style="width: 100%;" name="departement_id">
-                <option value="0">Pilih divisi</option>
-                <?php foreach ($departement as $d) { ?>
-                <option value="<?= $d['id']; ?>"><?= $d['departement_name']; ?></option>
-                <?php } ?>
-            </select>
+            <input type="text" class="form-control" id="name" placeholder="Nama divisi" name="name">
         </div>
     </div>
     <div class="form-group row">
@@ -29,16 +18,30 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Awal Tahun</label>
+        <label for="headmaster_id" class="col-sm-2 col-form-label">Kepala Sekolah</label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="start_date" placeholder="contoh 21 Juli 2021 .."
-                name="start_date">
+            <select class="form-control select2" style="width: 100%;" name="headmaster_id">
+                <option selected="selected" value="1">Dra. Hj. Rossa Rohsunah, M.Pd</option>
+                <option value="2">Anda Suhanda, S.Sy</option>
+                <option value="3">Andri Kusnadi, S.Pd</option>
+                <option value="4">Oyib Abdurrahman, S.Pd.I</option>
+            </select>
         </div>
     </div>
     <div class="form-group row">
-        <label for="end_date" class="col-sm-2 col-form-label">Akhir Tahun</label>
-        <div class="col-sm-10">
-            <input type="date" class="form-control" id="end_date" placeholder="contoh 12 Juni 2022 .." name="end_date">
+        <div class="offset-sm-2 col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Aktif
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="0">
+                <label class="form-check-label" for="exampleRadios2">
+                    Non Aktif
+                </label>
+            </div>
         </div>
     </div>
     <button type="submit" class="btn btn-dark">Tambah</button>

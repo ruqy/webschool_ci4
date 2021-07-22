@@ -55,9 +55,9 @@ class Grades extends Migration
 			],
 		]);
 		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'departements', 'id');
-		$this->forge->addForeignKey('level_id', 'levels', 'id');
-		$this->forge->addForeignKey('school_year_id', 'school_years', 'school_year_id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'departement_id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('level_id', 'levels', 'departement_id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('school_year_id', 'school_years', 'school_year_id', 'CASCADE', 'CASCADE');
 		// $this->forge->addForeignKey('headmaster_id', 'teacher', 'id');
 		$this->forge->createTable('grades');
 	}

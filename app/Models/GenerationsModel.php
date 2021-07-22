@@ -43,9 +43,9 @@ class GenerationsModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('generations')->join('departements', 'departements.id=generations.departement_id', 'left')->get()->getResultArray();
+			return $this->table('generations')->join('departements', 'departements.departement_id=generations.departement_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('generations')->join('departements', 'departements.id=generations.departement_id', 'left')->where('generations.id', $id)->get()->getRowArray();
+			return $this->table('generations')->join('departements', 'departements.departement_id=generations.departement_id', 'left')->where('generations.id', $id)->get()->getRowArray();
 		}
 	}
 }

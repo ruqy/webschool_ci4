@@ -8,13 +8,13 @@ class DepartementsModel extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'departements';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'departement_id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['name', 'desc', 'status', 'headmaster_id'];
+	protected $allowedFields        = ['departement_name', 'departement_desc', 'departement_status', 'headmaster_id'];
 
 	// Dates
 	protected $useTimestamps        = false;

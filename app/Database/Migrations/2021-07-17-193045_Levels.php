@@ -9,7 +9,7 @@ class Levels extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id' => [
+			'level_id' => [
 				'type' => 'BIGINT',
 				'unsigned' => true,
 				'auto_increment' => true,
@@ -34,8 +34,8 @@ class Levels extends Migration
 				'type' => 'DATETIME',
 			],
 		]);
-		$this->forge->addKey('id');
-		$this->forge->addForeignKey('departement_id', 'departements', 'id');
+		$this->forge->addKey('level_id');
+		$this->forge->addForeignKey('departement_id', 'departements', 'departement_id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('levels');
 	}
 

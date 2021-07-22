@@ -43,9 +43,9 @@ class GradesModel extends Model
 	public function get_data($id = NULL)
 	{
 		if ($id === NULL) {
-			return $this->table('grades')->join('departements', 'departements.id=grades.departement_id', 'left')->join('levels', 'levels.id=grades.level_id', 'left')->get()->getResultArray();
+			return $this->table('grades')->join('departements', 'departements.departement_id=grades.departement_id', 'left')->join('levels', 'levels.level_id=grades.level_id', 'left')->get()->getResultArray();
 		} else {
-			return $this->table('grades')->join('departements', 'departements.id=grades.departement_id', 'left')->where('grades.id', $id)->get()->getRowArray();
+			return $this->table('grades')->join('departements', 'departements.departement_id=grades.departement_id', 'left')->join('levels', 'levels.level_id=grades.level_id', 'left')->where('grades.id', $id)->get()->getRowArray();
 		}
 	}
 }

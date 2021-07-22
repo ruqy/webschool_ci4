@@ -136,6 +136,14 @@ class SchoolController extends BaseController
 
 	public function delete($id)
 	{
+		$data = $this->schools->find($id);
+		//cek apakah logonya bukan default
+		if ($data['logo'] != '/assets/img/logo/default.jpg') {
+			//hapus logo lama
+			$pathDelete = '.' . $data['logo'];
+			unlink($pathDelete);
+		}
+
 		$this->schools->delete($id);
 		session()->setFlashdata('pesan', 'dihapus');
 		session()->setFlashdata('alert', 'alert-danger');

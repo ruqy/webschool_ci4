@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-dark">Tambah</button>
+    <button type="submit" class="btn btn-dark">Ubah</button>
     <a href="<?= base_url('/academic'); ?>" class="btn btn-secondary">Batal</a>
 </form>
 <?= $this->endSection() ?>

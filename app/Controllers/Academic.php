@@ -68,7 +68,7 @@ class Academic extends BaseController
 				$view = "grade";
 				break;
 			case 'Angkatan':
-				$data['data'] = $this->generationsModel->find($id);
+				$data['data'] = $this->generationsModel->get_data($id);
 				$view = "generation";
 				break;
 		}

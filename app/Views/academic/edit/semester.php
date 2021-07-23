@@ -9,13 +9,15 @@
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Semester" name="name">
+            <input type="text" class="form-control" id="name" name="name"
+                value="<?= (empty(old('name'))) ? $semester['name'] : old('name'); ?>">
         </div>
     </div>
     <div class="form-group row">
         <label for="desc" class="col-sm-2 col-form-label">Deskripsi</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="desc" placeholder="Deskripsi Semester" name="desc">
+            <input type="text" class="form-control" id="desc" name="desc"
+                value="<?= (empty(old('desc'))) ? $semester['desc'] : old('desc'); ?>">
         </div>
     </div>
     <div class="form-group row">
@@ -23,8 +25,10 @@
         <div class="col-sm-10">
             <select class="form-control select2" style="width: 100%;" name="departement_id">
                 <option value="0">Pilih divisi</option>
-                <?php foreach ($departement as $d) { ?>
-                <option value="<?= $d['id']; ?>"><?= $d['departement_name']; ?></option>
+                <?php foreach ($departements as $d) { ?>
+                <option value="<?= $d['departement_id']; ?>"
+                    <?= ($semester['departement_id'] == $d['departement_id']) ? 'selected="selected"' : ''; ?>>
+                    <?= $d['departement_name']; ?></option>
                 <?php } ?>
             </select>
         </div>

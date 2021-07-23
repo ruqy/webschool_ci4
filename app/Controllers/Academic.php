@@ -190,7 +190,7 @@ class Academic extends BaseController
 					'departement_name' => $this->request->getPost('name'),
 					'departement_desc' => $this->request->getPost('desc'),
 					'headmaster_id' => $this->request->getPost('headmaster_id'),
-					'departement_status' => $this->request->getPost('departement_status'),
+					'departement_status' => $this->request->getPost('status'),
 				];
 				$this->departementsModel->save($data);
 				break;
@@ -203,7 +203,7 @@ class Academic extends BaseController
 				];
 				$this->levelsModel->save($data);
 				break;
-			case 'Tahun Ajaran':
+			case 'Tahun Pelajaran':
 				$data = [
 					'school_year_id' => $this->request->getPost('id'),
 					'school_year_name' => $this->request->getPost('name'),

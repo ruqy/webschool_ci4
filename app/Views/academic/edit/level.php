@@ -9,7 +9,8 @@
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Tingkat" name="name">
+            <input type="text" class="form-control" id="name" placeholder="Tingkat" name="name"
+                value="<?= (empty(old('name'))) ? $level['level_name'] : old('name'); ?>">
         </div>
     </div>
     <div class="form-group row">
@@ -17,8 +18,10 @@
         <div class="col-sm-10">
             <select class="form-control select2" style="width: 100%;" name="departement_id">
                 <option value="0">Pilih divisi</option>
-                <?php foreach ($departement as $d) { ?>
-                <option value="<?= $d['id']; ?>"><?= $d['departement_name']; ?></option>
+                <?php foreach ($departements as $d) { ?>
+                <option value="<?= $d['departement_id']; ?>"
+                    <?= ($level['departement_id'] == $d['departement_id']) ? 'selected="selected"' : ''; ?>>
+                    <?= $d['departement_name']; ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -26,7 +29,8 @@
     <div class="form-group row">
         <label for="desc" class="col-sm-2 col-form-label">Deskripsi</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="desc" placeholder="Deskripsi Tingkat" name="desc">
+            <input type="text" class="form-control" id="desc" placeholder="Deskripsi Tingkat" name="desc"
+                value="<?= (empty(old('desc'))) ? $level['level_desc'] : old('desc'); ?>">
         </div>
     </div>
 

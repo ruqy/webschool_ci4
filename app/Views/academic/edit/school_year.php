@@ -9,7 +9,8 @@
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Tahun Pelajaran" name="name">
+            <input type="text" class="form-control" id="name" name="name"
+                value="<?= (empty(old('name'))) ? $school_year['school_year_name'] : old('name'); ?>">
         </div>
     </div>
     <div class="form-group row">
@@ -17,8 +18,10 @@
         <div class="col-sm-10">
             <select class="form-control select2" style="width: 100%;" name="departement_id">
                 <option value="0">Pilih divisi</option>
-                <?php foreach ($departement as $d) { ?>
-                <option value="<?= $d['id']; ?>"><?= $d['departement_name']; ?></option>
+                <?php foreach ($departements as $d) { ?>
+                <option value="<?= $d['departement_id']; ?>"
+                    <?= ($school_year['departement_id'] == $d['departement_id']) ? 'selected="selected"' : ''; ?>>
+                    <?= $d['departement_name']; ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -26,20 +29,22 @@
     <div class="form-group row">
         <label for="desc" class="col-sm-2 col-form-label">Deskripsi</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="desc" placeholder="Deskripsi Tahun Pelajaran" name="desc">
+            <input type="text" class="form-control" id="desc" name="desc"
+                value="<?= (empty(old('desc'))) ? $school_year['school_year_desc'] : old('desc'); ?>">
         </div>
     </div>
     <div class="form-group row">
         <label for="start_date" class="col-sm-2 col-form-label">Awal Tahun</label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="start_date" placeholder="contoh 21 Juli 2021 .."
-                name="start_date">
+            <input type="date" class="form-control" id="start_date" name="start_date"
+                value="<?= (empty(old('start_date'))) ? $school_year['start_date'] : old('start_date'); ?>">
         </div>
     </div>
     <div class="form-group row">
         <label for="end_date" class="col-sm-2 col-form-label">Akhir Tahun</label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="end_date" placeholder="contoh 12 Juni 2022 .." name="end_date">
+            <input type="date" class="form-control" id="end_date" name="end_date"
+                value="<?= (empty(old('end_date'))) ? $school_year['end_date'] : old('end_date'); ?>">
         </div>
     </div>
 

@@ -17,7 +17,6 @@ class Academic extends BaseController
 
 	public function __construct()
 	{
-		helper('filesystem');
 		$this->header = 'Data Akademik';
 		$this->departementsModel = new DepartementsModel();
 		$this->generationsModel = new GenerationsModel();
@@ -116,7 +115,7 @@ class Academic extends BaseController
 				$data['level_desc'] = $this->request->getPost('desc');
 				$data['departement_id'] = $this->request->getPost('departement_id');
 				$this->levelsModel->save($data);
-				break;
+			break;
 			case 'Kelas':
 				$data['name'] = $this->request->getPost('name');
 				$data['desc'] = $this->request->getPost('desc');
@@ -126,6 +125,7 @@ class Academic extends BaseController
 				$data['capacity'] = $this->request->getPost('capacity');
 				$data['current_capacity'] = $this->request->getPost('current_capacity');
 				$data['status'] = $this->request->getPost('status');
+				// dd($data);
 				$this->gradesModel->save($data);
 				break;
 			case 'Angkatan':
@@ -282,10 +282,5 @@ class Academic extends BaseController
 		session()->setFlashdata('pesan', ' dihapus');
 		session()->setFlashdata('alert', 'alert-danger');
 		return redirect()->to(base_url('/academic'));
-	}
-
-	//sub fungsi untuk membuat fungsi create per tabel
-	private function _create_school_years()
-	{
 	}
 }

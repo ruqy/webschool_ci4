@@ -18,6 +18,7 @@ class schoolsSeeder extends Seeder
             'website'       => 'ma.p3sb.ponpes.id',
             'fax'           => '222-123-555',
             'created_at'    => Time::now(),
+            'updated_at'    => Time::now(),
         ];
 
         // Simple Queries

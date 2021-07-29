@@ -37,7 +37,7 @@
         <label for="school_year" class="col-sm-2 col-form-label">Tahun Ajaran</label>
         <div class="col-sm-10">
             <select class="form-control select2" style="width: 100%;" name="school_year">
-                <option selected="selected" value="0" selected>Pilih tahun</option>
+                <option selected="selected" value="0" selected>Pilih tahunca</option>
                 <?php foreach ($school_years as $l) : ?>
                 <option value="<?= $l['school_year_id']; ?>"><?= $l['school_year_name']; ?></option>
                 <?php endforeach; ?>
